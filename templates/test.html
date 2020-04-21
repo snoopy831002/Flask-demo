@@ -1,0 +1,43 @@
+<html>
+<head></head>
+<body>
+	<div id="square">
+		<h1 id="head">Hi Hi~~~ this is my html </h1>
+		<p id="name">My name is Emily~</p>
+	</div>
+</body>
+
+<style type="text/css">
+	#head{color:red;}
+    #square{background-color: pink;}
+</style>
+
+<script type="text/javascript">
+	/*
+	var rows = 5;
+	for (var i = 1; i<=rows; i++){
+		for(var j=1; j<=i; j++){
+			document.write("* ")
+		}
+		document.write("<br/>")
+	}
+	*/
+	var row =4 
+	for(var i=0; i<row; i++){
+		var str = '';
+		for(var j=1; j< row-i; j++){
+			str = str+'&nbsp';
+		}
+		for(var k=1;k<=(2*i+1);k++){
+			str=str+'*'
+		}
+		document.write(str);
+		document.write("<br/>");
+	}
+	document.getElementById("name").innerHTML = "My name is Jason~";
+	document.getElementById("name").style.color = "blue";
+
+
+</script>
+
+</html>
