@@ -22,28 +22,15 @@ class views:
   def create():
     username = request.form['username']
     email = request.form['email']
-    #user = User(username, email)
-    #User.create("username", "email")
-    print("----------inininin--------------")
-    user = User(username="username", email="email@ccc.com")
+    user = User(id=1,username=username, email=email)
     create(user)
-    print("----------created--------------")
-    #db.session.add(user)
-    #db.session.commit()
-    #db.session.add(user)
-    #db.session.commit()
-
     return "Done"
-
-
     #return redirect(url_for('users.index'))
 
   def show(id):
-    try:
-      user = User.query.filter_by(id=id).first()
-      return render_template('users/show.html')
-    except TemplateNotFound:
-      abort(404)
+    user = User.query.filter_by(id=id).first()
+    return render_template('users/show.html',user=user)
+
 
   def edit(id):
     try:
