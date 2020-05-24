@@ -1,7 +1,8 @@
-from flask import render_template
+from flask import url_for
 from app.views.users import views
 from app import app
 from jinja2 import TemplateNotFound
+
 
 # Define route and method
 @app.route('/', methods=['GET'])
@@ -28,21 +29,16 @@ def create():
 @app.route('/<int:id>', methods=['GET'])
 def show(id):
   try:
-    return views.show(id)
+    url = url_for("edit",id=id)
+    return views.show(id,url)
   except TemplateNotFound:
     return abort(404)
-  #user = User.query.filter_by(id=id).first()
-  #try:
-  #  return render_template('users/show.html', user = user)
-  #except TemplateNotFound:
-  #  abort(404)
 
 
 @app.route('/<int:id>/edit', methods=['GET'])
 def edit(id):
   try:
-    user = User.query.filter_by(id=id).first()
-    return render_template('users/edit.html', user = user)
+    return views.edit(id)
   except TemplateNotFound:
     abort(404)
 

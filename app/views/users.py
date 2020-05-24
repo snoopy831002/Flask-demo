@@ -27,24 +27,23 @@ class views:
     return "Done"
     #return redirect(url_for('users.index'))
 
-  def show(id):
+  def show(id,url):
     user = User.query.filter_by(id=id).first()
-    return render_template('users/show.html',user=user)
+    return render_template('users/show.html',user=user,url=url)
 
-
+  # This is a backend function
   def edit(id):
-    try:
-      user = User.query.filter_by(id=id).first()
-      return render_template('users/edit.html')
-    except TemplateNotFound:
-      abort(404)
+    user = User.query.filter_by(id=id).first()
+    return render_template('users/edit.html',user=user)
 
+  #This is a backend function
   def update(id):
     user = User.query.filter_by(id=id).first()
     email = request.form['email']
     user.email = email
     return redirect(url_for('users.index'))
 
+  # This is a backend function
   def destroy(id):
     user = User.query.filter_by(id=id).first()
     db.session.delete(user)
