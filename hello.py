@@ -11,18 +11,19 @@ def index():
 @app.route('/new', methods=['GET'])
 def new():
   return views.new()
-  #user = User()
-  #return render_template('users/new.html', users = user)
 
 
 @app.route('/create', methods=['POST'])
 def create():
-  username = request.form['username']
-  email = request.form['email']
-  user = User(username, email)
-  db.session.add(user)
-  db.session.commit()
-  return redirect(url_for('users.index'))
+  return views.create()
+  #username = request.form['username']
+  #email = request.form['email']
+  #user = User(username, email)
+  #db.session.add(user)
+  #db.session.commit()
+  #return redirect(url_for('users.index'))
+
+
 @app.route('/<int:id>', methods=['GET'])
 def show(id):
   try:

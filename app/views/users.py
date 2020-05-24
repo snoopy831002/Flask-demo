@@ -1,5 +1,5 @@
 # app/views/users.py
-from app.models.users import User
+from app.models.users import User,create
 import flask
 from flask import Blueprint, request, jsonify, render_template, abort, redirect, url_for
 from jinja2 import TemplateNotFound
@@ -13,18 +13,30 @@ class views:
   def index():
     return render_template('users/index.html', name = "sss")
 
-  # Render the
+  # Render the creation page
   def new():
-    user = User()
+    user = User() # Dont know do i need the user
     return render_template('users/new.html', user = user)
 
+  # Backend api for creation
   def create():
     username = request.form['username']
     email = request.form['email']
-    user = User(username, email)
-    db.session.add(user)
-    db.session.commit()
-    return redirect(url_for('users.index'))
+    #user = User(username, email)
+    #User.create("username", "email")
+    print("----------inininin--------------")
+    user = User(username="username", email="email@ccc.com")
+    create(user)
+    print("----------created--------------")
+    #db.session.add(user)
+    #db.session.commit()
+    #db.session.add(user)
+    #db.session.commit()
+
+    return "Done"
+
+
+    #return redirect(url_for('users.index'))
 
   def show(id):
     try:
