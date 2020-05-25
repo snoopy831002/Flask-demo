@@ -4,8 +4,21 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
 
-def create(user):
+def create(username, email):
+    user = User(id=1, username=username, email=email)
     db.session.add(user)
+    db.session.commit()
+    return
+
+def update(id, email):
+    user = User.query.filter_by(id=id).first()
+    user.email = email
+    db.session.commit()
+    return
+
+def destroy(id):
+    user = User.query.filter_by(id=id).first()
+    db.session.delete(user)
     db.session.commit()
     return
 

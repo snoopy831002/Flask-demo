@@ -1,9 +1,14 @@
 {% extends "users/layout.html" %}
 {% block body %}
   <p>{{ user.username }}</p>
-  <form action="" method="POST">
+  <form action="{{ url_update }}" method="POST">
     <label for="email">email</label>
     <input type="text" name="email" value="{{ user.email }}"><br>
     <input type="submit" value="submit">
+  </form>
+  <form action="{{ url_delete }}" method="POST">
+    <label for="email">Delete user {{ user.username }}</label>
+    <input type="hidden" name="email" value="{{ user.email }}"><br>
+    <input type="submit" value="click me to delete">
   </form>
 {% endblock %}

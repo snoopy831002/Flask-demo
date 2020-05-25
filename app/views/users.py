@@ -1,5 +1,5 @@
 # app/views/users.py
-from app.models.users import User,create
+from app.models.users import User,create, update, destroy
 import flask
 from flask import Blueprint, request, jsonify, render_template, abort, redirect, url_for
 from jinja2 import TemplateNotFound
@@ -11,41 +11,36 @@ class views:
 
   # Render the index page
   def index():
-    return render_template('users/index.html', name = "sss")
+    return render_template('users/index.html')
 
   # Render the creation page
-  def new():
-    user = User() # Dont know do i need the user
-    return render_template('users/new.html', user = user)
+  def new(url):
+    user = User()
+    return render_template('users/new.html', user = user, url=url)
 
   # Backend api for creation
   def create():
     username = request.form['username']
     email = request.form['email']
-    user = User(id=1,username=username, email=email)
-    create(user)
-    return "Done"
-    #return redirect(url_for('users.index'))
+    create(username, email)
+    return "User creation successful!"
 
-  def show(id,url):
+  def show(id, url_update):
     user = User.query.filter_by(id=id).first()
-    return render_template('users/show.html',user=user,url=url)
+    return render_template('users/show.html',user=user,url_update = url_update)
 
   # This is a backend function
-  def edit(id):
+  def edit(id, url_update, url_delete):
     user = User.query.filter_by(id=id).first()
-    return render_template('users/edit.html',user=user)
+    return render_template('users/edit.html',user=user, url_update = url_update, url_delete = url_delete)
 
   #This is a backend function
   def update(id):
-    user = User.query.filter_by(id=id).first()
     email = request.form['email']
-    user.email = email
-    return redirect(url_for('users.index'))
+    update(id,email)
+    return
 
   # This is a backend function
   def destroy(id):
-    user = User.query.filter_by(id=id).first()
-    db.session.delete(user)
-    db.session.commit()
-    return redirect(url_for('users.index'))
+    destroy(id)
+    return
