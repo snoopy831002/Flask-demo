@@ -1,9 +1,6 @@
 # app/views/users.py
 from app.models.users import User,create, update, destroy
-import flask
-from flask import Blueprint, request, jsonify, render_template, abort, redirect, url_for
-from jinja2 import TemplateNotFound
-#from .. import db
+from flask import request, render_template, abort
 
 class views:
   def page_not_found():
