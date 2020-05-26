@@ -1,5 +1,5 @@
 # app/views/users.py
-from app.models.users import User,create, update, destroy
+from app.models.users import User,_create, _update, _destroy
 from flask import request, render_template, abort
 
 class views:
@@ -19,7 +19,7 @@ class views:
   def create():
     username = request.form['username']
     email = request.form['email']
-    create(username, email)
+    _create(username, email)
     return "User creation successful!"
 
   def show(id, url_update):
@@ -34,10 +34,10 @@ class views:
   #This is a backend function
   def update(id):
     email = request.form['email']
-    update(id,email)
+    _update(id,email)
     return
 
   # This is a backend function
   def destroy(id):
-    destroy(id)
+    _destroy(id)
     return
